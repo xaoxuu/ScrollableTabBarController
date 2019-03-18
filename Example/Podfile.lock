@@ -1,6 +1,6 @@
 PODS:
   - AXKit (0.3.10)
-  - ScrollableTabBarController (1.0.1):
+  - ScrollableTabBarController (1.0.0):
     - AXKit (= 0.3.10)
     - SnapKit (= 4.2.0)
   - SnapKit (4.2.0)
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   AXKit: ea0bc94ddf3827f004521da25aecee91b480fc97
-  ScrollableTabBarController: 905f7abe75b412861431c68101a1b9e9729a86b6
+  ScrollableTabBarController: 1ea35bb936ff14e831ee7821b479e108e6b50897
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
 
 PODFILE CHECKSUM: 67728944bac1863bf6ae180a915282a727cb980f

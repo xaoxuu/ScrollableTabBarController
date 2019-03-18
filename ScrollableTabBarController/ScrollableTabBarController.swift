@@ -166,8 +166,8 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
         let safeMargin = 2*marginX
         for i in 0..<tabBarButtons.count {
             let btn = tabBarButtons[i]
-            btn.alpha = 1 - 0.5*min(fabs(offset-CGFloat(i)), 1)
-            btn.transform = CGAffineTransform.init(translationX: 0, y: 2*min(fabs(offset-CGFloat(i)), 1)-2)
+            btn.alpha = 1 - 0.5*min(abs(offset-CGFloat(i)), 1)
+            btn.transform = CGAffineTransform.init(translationX: 0, y: 2*min(abs(offset-CGFloat(i)), 1)-2)
         }
         
         var i = Int(leftPage)
@@ -178,9 +178,9 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
             i = Int(leftPage)+1
         }
         if x > kScreenSize.width/2 {
-            viewControllers[i].rightNavBtn.alpha = 1 - limit(input: fabs(x-kScreenSize.width)/safeMargin, minValue: 0, maxValue: 1)
+            viewControllers[i].rightNavBtn.alpha = 1 - limit(input: abs(x-kScreenSize.width)/safeMargin, minValue: 0, maxValue: 1)
         } else {
-            viewControllers[i].rightNavBtn.alpha = 1 - limit(input: fabs(x)/safeMargin, minValue: 0, maxValue: 1)
+            viewControllers[i].rightNavBtn.alpha = 1 - limit(input: abs(x)/safeMargin, minValue: 0, maxValue: 1)
         }
         
         let alpha = viewControllers[i].rightNavBtn.alpha
