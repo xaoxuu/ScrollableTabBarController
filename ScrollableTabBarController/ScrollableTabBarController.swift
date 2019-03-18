@@ -218,7 +218,6 @@ open class MainViewController: UIViewController {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
-//        view.tintColor = UIColor.white
         
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         titleLabel.textColor = UIColor.white

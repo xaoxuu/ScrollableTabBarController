@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ScrollableTabBarController'
-  s.version = "1.0.0"
+  s.version = "1.0.1"
   s.license = 'MIT'
   s.summary = '一个可以横向滑动的TabBarController。'
   s.homepage = "http://xaoxuu.com"
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
 
   s.requires_arc = true
 
-  s.dependency 'SnapKit', '4.2.0'
-  s.dependency 'AXKit', '0.3.10'
+  s.dependency 'SnapKit'
+  s.dependency 'AXKit'
 
 end
