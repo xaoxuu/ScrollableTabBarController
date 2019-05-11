@@ -17,7 +17,7 @@ fileprivate let kStatusBarHeight = CGConstGetStatusBarHeight()
 fileprivate let navBtnWidth = CGFloat(32)
 
 open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
-
+    
     
     
     public let backgroundImageView = UIImageView()
@@ -36,6 +36,24 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
         return UIImage()
     }
     
+    /// 滚动到边界的时候，背景是否继续跟随手指移动
+    open func backgroundBounces() -> Bool {
+        return true
+    }
+    
+    /// 虚化蒙版
+    open func blurMask() -> UIVisualEffectView? {
+        let vev = UIVisualEffectView()
+        vev.effect = UIBlurEffect.init(style: .light)
+        let tmp = UIView()
+        tmp.backgroundColor = UIColor.init(white: 0, alpha: 0.1)
+        view.addSubview(tmp)
+        tmp.snp.makeConstraints { (make) in
+            make.edges.equalTo(view)
+        }
+        return vev
+    }
+    
     /// 设置子控制器
     ///
     /// - Returns: 子控制器
@@ -48,6 +66,7 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
     
     override open func viewDidLoad() {
         super.viewDidLoad()
+        backgroundImageView.contentMode = .scaleAspectFill
         backgroundImageView.image = setupBackgroundImage()
         view.addSubview(backgroundImageView)
         backgroundImageView.snp.remakeConstraints { (make) in
@@ -55,6 +74,14 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
             make.width.equalTo(kScreenSize.width + bgx)
             make.centerX.equalTo(view)
         }
+        
+        if let v = blurMask() {
+            view.addSubview(v)
+            v.snp.makeConstraints { (make) in
+                make.edges.equalTo(view)
+            }
+        }
+        
         
         viewControllers.append(contentsOf: setupChildViewControllers())
         
@@ -131,9 +158,6 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
         }
         
         
-        
-        
-        
     }
     
     open override func viewDidAppear(_ animated: Bool) {
@@ -147,7 +171,11 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
         let offset = scrollView.contentOffset.x/kScreenSize.width
         let count = viewControllers.count
         backgroundImageView.snp.updateConstraints { (make) in
-            make.centerX.equalTo(view).offset(limit(input: bgx/2 - bgx*offset/CGFloat(count-1), minValue: -bgx/2, maxValue: bgx/2))
+            if self.backgroundBounces() == true {
+                make.centerX.equalTo(view).offset(bgx/2 - bgx*offset/CGFloat(count-1))
+            } else {
+                make.centerX.equalTo(view).offset(limit(input: bgx/2 - bgx*offset/CGFloat(count-1), minValue: -bgx/2, maxValue: bgx/2))
+            }
         }
         let leftPage = min(max(floor(offset), 0), CGFloat(tabBarButtons.count-1))
         let rightPercent = offset-leftPage
@@ -177,6 +205,12 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
         } else if x > kScreenSize.width/2 {
             i = Int(leftPage)+1
         }
+        if i > viewControllers.count - 1 {
+            i = viewControllers.count - 1
+        } else if i < 0 {
+            i = 0
+        }
+        debugPrint("当前页码：", i)
         if x > kScreenSize.width/2 {
             viewControllers[i].rightNavBtn.alpha = 1 - limit(input: abs(x-kScreenSize.width)/safeMargin, minValue: 0, maxValue: 1)
         } else {
@@ -201,7 +235,7 @@ open class ScrollableTabBarController: UIViewController, UIScrollViewDelegate {
             scrollView.scrollRectToVisible(viewControllers[sender.tag].view.frame, animated: true)
         }
     }
-
+    
     private func limit(input: CGFloat, minValue: CGFloat, maxValue: CGFloat) -> CGFloat {
         var x = input
         x = max(x, minValue)

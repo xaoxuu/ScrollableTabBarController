@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ScrollableTabBarController'
-  s.version = "1.0.1"
+  s.version = "1.0.2"
   s.license = 'MIT'
   s.summary = '一个可以横向滑动的TabBarController。'
   s.homepage = "http://xaoxuu.com"

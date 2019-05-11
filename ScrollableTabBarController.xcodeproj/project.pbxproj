@@ -20,6 +20,7 @@
 		CD235902223BCC2100B28DCA /* ScrollableTabBarController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScrollableTabBarController.h; sourceTree = "<group>"; };
 		CD235903223BCC2100B28DCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CD23590A223BCC5B00B28DCA /* ScrollableTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableTabBarController.swift; sourceTree = "<group>"; };
+		CD51E72E2286DB0400871B45 /* ScrollableTabBarController.podspec */ = {isa = PBXFileReference; lastKnownFileType = text; path = ScrollableTabBarController.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +55,7 @@
 		CD2358F5223BCC2100B28DCA = {
 			isa = PBXGroup;
 			children = (
+				CD51E72E2286DB0400871B45 /* ScrollableTabBarController.podspec */,
 				CD235901223BCC2100B28DCA /* ScrollableTabBarController */,
 				CD235900223BCC2100B28DCA /* Products */,
 				0325EABB5A82687BB761196E /* Pods */,
